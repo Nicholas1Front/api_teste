@@ -5,13 +5,13 @@ class ItemsRepository{
         name,
         description,
         price,
-        quantity
+        quantity_available
     }){
         const item = await knex('items').insert({
             name : name,
             description : description,
             price : price,
-            quantity : quantity
+            quantity_available : quantity_available
         }).returning('*');
 
         return item[0];

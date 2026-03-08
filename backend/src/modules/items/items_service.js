@@ -12,7 +12,7 @@ class ItemsService{
             name : itemData.name,
             description : itemData.description,
             price : itemData.price,
-            quantity : itemData.quantity
+            quantity_available : itemData.quantity
         });
 
         return item;
@@ -22,14 +22,14 @@ class ItemsService{
         itemId,
         itemData
     }){
-        const existingItem = await itemsRepository.find({ id });
+        const existingItem = await itemsRepository.find({ id : itemId });
 
         if(existingItem.length === 0){
             throw new Error('Item not found');
         }
 
         const item = await itemsRepository.update({
-            id : id,
+            id : itemId,
             itemData : itemData
         });
 

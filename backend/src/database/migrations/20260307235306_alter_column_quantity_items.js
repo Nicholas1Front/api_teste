@@ -1,0 +1,19 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.up = function(knex) {
+    return knex.schema.alterTable('items', table => {
+        table.renameColumn('quantity', 'quantity_available');
+    })
+};
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = function(knex) {
+    return knex.schema.alterTable('items', table => {
+        table.renameColumn('quantity_available', 'quantity');
+    })
+};
