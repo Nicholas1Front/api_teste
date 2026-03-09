@@ -116,9 +116,12 @@ class OrdersService {
             let total_order_price = 0;
 
             for(const item of orderData.items){
-                const findedItem = await itemsService.findItems({
+
+                const itemFilters = {
                     id : item.id
-                })
+                }
+                
+                const findedItem = await itemsService.findItems(itemFilters);
 
                 if(findedItem.length === 0){
                     throw new Error(`Item with id ${item.id} not found`);
