@@ -1,9 +1,8 @@
 const {z} = require('zod');
-const { id } = require('zod/v4/locales');
 
 const createrOrderSchema = z.object({
     name : z.string().min(1).optional(),
-    items : z.array.min(1).of(
+    items : z.array().of(
         z.object({
             name : z.string().min(1, 'Name is required'),
             description : z.string().optional(),
@@ -16,7 +15,7 @@ const createrOrderSchema = z.object({
 const updateOrderSchema = z.object({
     user_id : z.coerce.number().int().positive().optional(),
     name : z.string().min(1).optional(),
-    items : z.array.min(1).of(
+    items : z.array.of(
         z.object({
             name : z.string().min(1, 'Name is required'),
             description : z.string().optional(),
