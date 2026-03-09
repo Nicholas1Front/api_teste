@@ -111,9 +111,9 @@ class OrdersService {
 
         let finishedItems = [];
 
-        if(orderData.items.length > 0){
+        let total_order_price = 0;
 
-            let total_order_price = 0;
+        if(orderData.items.length > 0){
 
             for(const item of orderData.items){
 
@@ -135,30 +135,35 @@ class OrdersService {
                     price : item.price
                 });
 
-                total_order_price += updatedOrderItem.price * updatedOrderItem.quantity;
-
-                finishedItems.push({
-                    id : findedItem[0].id,
-                    name : findedItem[0].name,
-                    description : findedItem[0].description,
-                    price : findedItem[0].price,
-                    quantity : updatedOrderItem.quantity
-                })
-
                 await itemsService.updateItem({
                     itemId : findedItem[0].id,
                     itemData : {
                         quantity_available : findedItem[0].quantity_available - updatedOrderItem.quantity
                     }
                 })
+
             }
 
-            updatedOrder = await ordersRepository.update({
-                id : orderId,
-                total_price : total_order_price
-            })
-
         }
+
+        const updatedOrderItems = await orderItemsRepository.findByOrderId(orderId);
+
+        for(const orderItem of updatedOrderItems){
+            total_order_price += orderItem.price * orderItem.quantity;
+
+            finishedItems.push({
+                id : orderItem.id,
+                name : orderItem.name,
+                description : orderItem.description,
+                price : orderItem.price,
+                quantity : orderItem.quantity
+            });
+        }
+
+        updatedOrder = await ordersRepository.update({
+            id : orderId,
+            total_price : total_order_price
+        })
 
         return {
             id : updatedOrder.id,
