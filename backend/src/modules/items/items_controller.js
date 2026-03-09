@@ -47,7 +47,7 @@ class ItemsController{
 
     async findItem(req ,res){
         try{
-            const filters = await findItemSchema.parse(req.query);
+            const filters = findItemSchema.parse(req.query);
 
             const items = await itemsService.findItems(filters);
 
