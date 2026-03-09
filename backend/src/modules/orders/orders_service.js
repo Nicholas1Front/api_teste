@@ -1,6 +1,6 @@
 const itemsService = require('../items/items_service');
 const ordersRepository = require('./orders_repository');
-const orderItemsRepository = require('./order_items_repository');
+const orderItemsRepository = require('./order_items/order_items_repository');
 
 class OrdersService {
     async createOrder({
