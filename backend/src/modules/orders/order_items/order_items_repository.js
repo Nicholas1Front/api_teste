@@ -42,7 +42,9 @@ class OrderItemsRepository {
     }
 
     async findByOrderId(order_id){
-        const order_items = await knex('order_items').where({ order_id }).select('*');
+        const query = knex('order_items').select('*').where({ order_id });
+
+        const order_items = query.orderBy('id', 'asc');
 
         return order_items;
     }
