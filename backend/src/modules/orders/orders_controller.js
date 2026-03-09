@@ -1,7 +1,8 @@
 const ordersService = require('./orders_service');
 const {
     createrOrderSchema,
-    updateOrderSchema
+    updateOrderSchema,
+    findOrdersSchema
 } = require('./orders_schema');
 
 class OrdersController{
@@ -22,7 +23,7 @@ class OrdersController{
         }catch(err){
             return res.status(400).json({
                 message : `Error creating order`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -43,7 +44,7 @@ class OrdersController{
         }catch(err){
             return res.status(400).json({
                 message : `Error updating order`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -58,7 +59,7 @@ class OrdersController{
         }catch(err){
             return res.status(400).json({
                 messsage : `Error deleting order`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -74,7 +75,7 @@ class OrdersController{
         }catch(err){
             return res.status(400).json({
                 message : `Error retrieving orders`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -92,7 +93,7 @@ class OrdersController{
         }catch(err){
             return res.status(400).json({
                 message : `Error retrieving orders`,
-                error : err
+                error : err.message
             })
         }
     }
