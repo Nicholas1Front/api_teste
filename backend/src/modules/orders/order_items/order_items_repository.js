@@ -28,7 +28,8 @@ class OrderItemsRepository {
             order_id : order_id,
             item_id : item_id,
             quantity : quantity,
-            price : price
+            price : price,
+            updated_at : knex.fn.now()
         }).returning('*');
 
         return order_item[0];

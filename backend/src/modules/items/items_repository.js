@@ -21,7 +21,10 @@ class ItemsRepository{
         id,
         itemData
     }){
-        const item = await knex('items').where({id}).update(itemData).returning('*');
+        const item = await knex('items').where({id}).update({
+            ...itemData,
+            updated_at : knex.fn.now()
+        }).returning('*');
 
         return item[0];
     }

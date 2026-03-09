@@ -24,7 +24,8 @@ class OrdersRepository{
         const order = await knex('orders').where({ id }).update({
             user_id : user_id,
             name : name,
-            total_price : total_price
+            total_price : total_price,
+            updated_at : knex.fn.now()
         }).returning('*');
 
         return order[0];
