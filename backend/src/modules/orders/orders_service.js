@@ -120,7 +120,7 @@ class OrdersService {
                 const itemFilters = {
                     id : item.id
                 }
-                
+
                 const findedItem = await itemsService.findItems(itemFilters);
 
                 if(findedItem.length === 0){
@@ -128,6 +128,7 @@ class OrdersService {
                 }
 
                 const updatedOrderItem = await orderItemsRepository.update({
+                    id : item.id,
                     order_id : orderId,
                     item_id : item.id,
                     quantity : item.quantity,
