@@ -17,6 +17,7 @@ const updateOrderSchema = z.object({
     name : z.string().min(1).optional(),
     items : z.array(
         z.object({
+            id : z.coerce.number().int().positive().optional(),
             name : z.string().min(1, 'Name is required'),
             description : z.string().optional(),
             price : z.coerce.number().positive().min(1, 'Price is required'),
