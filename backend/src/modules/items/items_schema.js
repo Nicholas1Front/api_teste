@@ -3,8 +3,8 @@ const {z} = require('zod');
 const createItemSchema = z.object({
     name : z.string().min(1, 'Name is required'),
     description : z.string().optional(),
-    price : z.string().min(1, 'Price is required'),
-    quantity : z.coerce.number().int().min(0, 'Quantity must be a non-negative integer')
+    price : z.coerce.number().positive().min(1, 'Price is required'),
+    quantity : z.coerce.number().int().positive().min(0, 'Quantity must be a non-negative integer')
 })
 
 const updateItemSchema = z.object({
